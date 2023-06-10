@@ -5,7 +5,7 @@ description = "Add a short description here"
 authors = [
     { name = "YadaYuki", email = "yada.yuki@fuji.waseda.jp" }
 ]
-dependencies = ["polars[numpy,pandas,pyarrow]~=0.18.2"]
+dependencies = ["polars~=0.18.2"]
 readme = "README.md"
 requires-python = ">= 3.11"
 
