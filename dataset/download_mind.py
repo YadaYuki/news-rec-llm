@@ -1,9 +1,9 @@
 from const.path import DATASET_DIR
 import requests
 from tqdm import tqdm
-from utils.logger import logger
 from pydantic import BaseModel
 from zipfile import ZipFile
+from concurrent.futures import ThreadPoolExecutor, wait
 
 MIND_DATASET_BASE_URL = "https://mind201910small.blob.core.windows.net/release"
 MIND_DATASET_DIR = DATASET_DIR / "mind"
@@ -21,7 +21,7 @@ def download_mind(zip_filename: str) -> None:
     res = requests.get(dataset_url, stream=True)
     KB = 1024
     data_size = int(res.headers.get("content-length", 0))
-    progress_bar = tqdm(total=data_size, unit="iB", unit_scale=True)
+    progress_bar = tqdm(total=data_size, unit="iB", unit_scale=True, desc=f"[{zip_filename}]")
 
     with open(MIND_ZIP_DIR / zip_filename, "wb") as file:
         for chunk in res.iter_content(KB):
@@ -29,23 +29,23 @@ def download_mind(zip_filename: str) -> None:
             file.write(chunk)
     progress_bar.close()
 
-    logger.debug(f"{zip_filename} download completed.")
-
 
 def download_mind_dataset() -> None:
     """
     1. Download Microsoft News Dataset.
     """
     data_item_list: list[DataItemType] = [
-        # DataItemType(**{"data_size": "small", "data_type": "train", "zip_filename": "MINDsmall_train.zip"}),
+        DataItemType(**{"data_size": "small", "data_type": "train", "zip_filename": "MINDsmall_train.zip"}),
         DataItemType(**{"data_size": "small", "data_type": "val", "zip_filename": "MINDsmall_dev.zip"}),
-        # DataItemType(**{"data_size": "large", "data_type": "train", "zip_filename": "MINDlarge_train.zip"}),
-        # DataItemType(**{"data_size": "large", "data_type": "val", "zip_filename": "MINDlarge_dev.zip"}),
-        # DataItemType(**{"data_size": "large", "data_type": "test", "zip_filename": "MINDlarge_test.zip"}),
+        DataItemType(**{"data_size": "large", "data_type": "train", "zip_filename": "MINDlarge_train.zip"}),
+        DataItemType(**{"data_size": "large", "data_type": "val", "zip_filename": "MINDlarge_dev.zip"}),
+        DataItemType(**{"data_size": "large", "data_type": "test", "zip_filename": "MINDlarge_test.zip"}),
     ]
 
-    for item in data_item_list:
-        download_mind(item.zip_filename)
+    with ThreadPoolExecutor() as executor:
+        res = [executor.submit(download_mind, item.zip_filename) for item in data_item_list]
+        wait(res)
+
     """
     2. Extract zip format Dataset.
     """
