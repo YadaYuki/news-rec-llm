@@ -1,29 +1,62 @@
 from const.path import DATASET_DIR
 import requests
 from tqdm import tqdm
-
+from utils.logger import logger
+from pydantic import BaseModel
+from zipfile import ZipFile
 
 MIND_DATASET_BASE_URL = "https://mind201910small.blob.core.windows.net/release"
-MIND_ZIP_DIR = DATASET_DIR / "mind" / "zip"
+MIND_DATASET_DIR = DATASET_DIR / "mind"
+MIND_ZIP_DIR = MIND_DATASET_DIR / "zip"
 
 
-def _download_mind(zip_filename: str) -> None:
+class DataItemType(BaseModel):
+    data_size: str
+    data_type: str
+    zip_filename: str
+
+
+def download_mind(zip_filename: str) -> None:
     dataset_url = f"{MIND_DATASET_BASE_URL}/{zip_filename}"
     res = requests.get(dataset_url, stream=True)
     KB = 1024
     data_size = int(res.headers.get("content-length", 0))
+    progress_bar = tqdm(total=data_size, unit="iB", unit_scale=True)
+
     with open(MIND_ZIP_DIR / zip_filename, "wb") as file:
-        for chunk in tqdm(
-            res.iter_content(KB, False), unit_scale=True, unit_divisor=KB, total=data_size / KB, unit="B"
-        ):
+        for chunk in res.iter_content(KB):
+            progress_bar.update(len(chunk))
             file.write(chunk)
+    progress_bar.close()
 
-    print(f"{zip_filename} completed.")
+    logger.debug(f"{zip_filename} download completed.")
 
 
-# training_small_url = f"{MIND_DATASET_BASE_URL}/MINDsmall_train.zip"
-# validation_small_url = f'{base_url}/MINDsmall_dev.zip'
-# training_large_url = f'{base_url}/MINDlarge_train.zip'
-# validation_large_url = f'{base_url}/MINDlarge_dev.zip'
-# test_large_url = f'{base_url}/MINDlarge_test.zip'
-_download_mind("MINDsmall_train.zip")
+def download_mind_dataset() -> None:
+    """
+    1. Download Microsoft News Dataset.
+    """
+    data_item_list: list[DataItemType] = [
+        # DataItemType(**{"data_size": "small", "data_type": "train", "zip_filename": "MINDsmall_train.zip"}),
+        DataItemType(**{"data_size": "small", "data_type": "val", "zip_filename": "MINDsmall_dev.zip"}),
+        # DataItemType(**{"data_size": "large", "data_type": "train", "zip_filename": "MINDlarge_train.zip"}),
+        # DataItemType(**{"data_size": "large", "data_type": "val", "zip_filename": "MINDlarge_dev.zip"}),
+        # DataItemType(**{"data_size": "large", "data_type": "test", "zip_filename": "MINDlarge_test.zip"}),
+    ]
+
+    for item in data_item_list:
+        download_mind(item.zip_filename)
+    """
+    2. Extract zip format Dataset.
+    """
+    for data_item in data_item_list:
+        zip_file_path = MIND_ZIP_DIR / data_item.zip_filename
+        extract_dir = MIND_DATASET_DIR / data_item.data_size / data_item.data_type
+        extract_dir.mkdir(parents=True, exist_ok=True)
+        zf = ZipFile(zip_file_path, "r")
+        zf.extractall(extract_dir)
+        zf.close()
+
+
+if __name__ == "__main__":
+    download_mind_dataset()
