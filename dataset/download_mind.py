@@ -1,4 +1,4 @@
-from const.path import DATASET_DIR
+from src.const.path import DATASET_DIR
 import requests
 from tqdm import tqdm
 from pydantic import BaseModel
