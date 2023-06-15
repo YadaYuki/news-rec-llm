@@ -1,4 +1,4 @@
-from const.path import DATASET_DIR
+from src.const.path import DATASET_DIR
 import requests
 from tqdm import tqdm
 from pydantic import BaseModel
@@ -45,6 +45,8 @@ def download_mind_dataset() -> None:
     with ThreadPoolExecutor() as executor:
         res = [executor.submit(download_mind, item.zip_filename) for item in data_item_list]
         wait(res)
+
+    
 
     """
     2. Extract zip format Dataset.
