@@ -1,5 +1,5 @@
 import pytest
-from utils.metrics.metrics import DCG_K, nDCG_K
+from utils.metrics.metrics import DCG_K, nDCG_K, MRR
 
 
 @pytest.mark.parametrize(
@@ -28,3 +28,17 @@ def test_nDCG_at_K(
     expected: float,
 ) -> None:
     assert nDCG_K(recommended_item_scores, K) == pytest.approx(expected, 0.001)
+
+
+@pytest.mark.parametrize(
+    "recommended_item_scores,expected",
+    [
+        ([1.0, 0.0, 1.0], 0.7039),
+        ([1.0, 1.0, 1.0], 1),
+    ],
+)
+def test_MRR(
+    recommended_item_scores: list[float],
+    expected: float,
+) -> None:
+    assert MRR(recommended_item_scores) == pytest.approx(expected, 0.001)

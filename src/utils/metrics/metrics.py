@@ -17,3 +17,13 @@ def DCG_K(
     gains = 2**Kth_items_scores - 1
     discounts = np.log2(np.arange(1, K + 1) + 1)
     return sum(gains / discounts)
+
+
+def MRR(
+    recommended_items_scores: list[float],
+) -> float:
+    assert sum(recommended_items_scores) > 0
+    recommended_items_scores_np = np.array(recommended_items_scores)
+    rr = recommended_items_scores_np / (np.arange(len(recommended_items_scores_np) + 1) + 1)
+    number_of_positive = np.sum(recommended_items_scores_np)
+    return rr / number_of_positive
