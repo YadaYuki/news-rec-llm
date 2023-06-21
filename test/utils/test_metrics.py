@@ -48,6 +48,7 @@ def test_MRR(
     "recommended_top_Kth_items_embeddings,K,expected",
     [
         ([[1.0, 0.0, 1.0], [1.0, 0.0, 1.0], [1.0, 0.0, 1.0]], 3, 1.0),
+        ([[1.0, 0.1, 1.0], [1.0, 0.0, 0.0], [0.0, 0.0, 1.0]], 3, 0.4702),
     ],
 )
 def test_ILS(
