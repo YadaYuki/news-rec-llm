@@ -1,5 +1,5 @@
 import pytest
-from utils.metrics.metrics import DCG_K, nDCG_K, MRR
+from utils.metrics.metrics import DCG_K, nDCG_K, MRR, ILS
 
 
 @pytest.mark.parametrize(
@@ -42,3 +42,17 @@ def test_MRR(
     expected: float,
 ) -> None:
     assert MRR(recommended_item_scores) == pytest.approx(expected, 0.001)
+
+
+@pytest.mark.parametrize(
+    "recommended_top_Kth_items_embeddings,K,expected",
+    [
+        ([[1.0, 0.0, 1.0], [1.0, 0.0, 1.0], [1.0, 0.0, 1.0]], 3, 1.0),
+    ],
+)
+def test_ILS(
+    recommended_top_Kth_items_embeddings: list[list[float]],
+    K: int,
+    expected: float,
+) -> None:
+    assert ILS(recommended_top_Kth_items_embeddings, K) == pytest.approx(expected, 0.001)
