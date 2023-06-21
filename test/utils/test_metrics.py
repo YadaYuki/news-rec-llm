@@ -33,8 +33,8 @@ def test_nDCG_at_K(
 @pytest.mark.parametrize(
     "recommended_item_scores,expected",
     [
-        ([1.0, 0.0, 1.0], 0.7039),
-        ([1.0, 1.0, 1.0], 1),
+        ([1.0, 0.0, 1.0], 0.6667),
+        ([1.0, 1.0, 1.0], 0.6111),
     ],
 )
 def test_MRR(

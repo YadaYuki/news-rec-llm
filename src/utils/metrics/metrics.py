@@ -24,6 +24,6 @@ def MRR(
 ) -> float:
     assert sum(recommended_items_scores) > 0
     recommended_items_scores_np = np.array(recommended_items_scores)
-    rr = recommended_items_scores_np / (np.arange(len(recommended_items_scores_np) + 1) + 1)
+    rr = np.sum(recommended_items_scores_np / (np.arange(len(recommended_items_scores_np)) + 1))
     number_of_positive = np.sum(recommended_items_scores_np)
     return rr / number_of_positive
