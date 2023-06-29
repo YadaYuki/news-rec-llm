@@ -12,7 +12,7 @@ class MINDDataFrame:
     @classmethod
     def read_news_df(cls, path_to_news_tsv: Path, has_entities: bool = False) -> pl.DataFrame:
         # FIXME:
-        # pl.read_csvを直接実行すると、行が欠損するため、pandasでtsvを読み取り、polarsのDataFrameに変換する方式にする。
+        # pl.read_csvを直接実行すると、行が欠損するため、pandasでtsvを読み取り、polarsのDataFrameに変換する
         news_df = pd.read_csv(path_to_news_tsv, sep="\t", encoding="utf8", header=None)
         news_df.columns = [
             "news_id",
