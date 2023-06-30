@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import Tuple
 
 
-class RecommenderBase(ABC):
+class NewsRecommenderBase(ABC):
     @abstractmethod
     def fit(self, train_behavior_df: pl.DataFrame, train_news_df: pl.DataFrame) -> None:
         pass

@@ -17,7 +17,8 @@ class MatrixIDMapper(BaseModel):
 
 class ImplicitMFBasedNewsRecommender(NewsRecommenderBase):
     def __init__(self) -> None:
-        self.model = AlternatingLeastSquares()  # TODO: Hyperparameter Tuning
+        #  TODO: Hyperparameter Tuning & Device.
+        self.model = AlternatingLeastSquares()
         self.feedback_matrix: scipy.sparse.spmatrix = None
         self.id_mapper: MatrixIDMapper | None = None
 
@@ -31,13 +32,20 @@ class ImplicitMFBasedNewsRecommender(NewsRecommenderBase):
         assert self.feedback_matrix is not None
         assert self.id_mapper is not None
 
-        user_idxes: np.ndarray = np.array([self.id_mapper.user_id_to_idx_map[user_id] for user_id in user_ids])
+        filtered_user_ids: list[str] = list(
+            filter(lambda uid: (uid in self.id_mapper.user_id_to_idx_map), user_ids.tolist())
+        )
+
+        user_idxes: np.ndarray = np.array(
+            [self.id_mapper.user_id_to_idx_map[user_id] for user_id in filtered_user_ids]
+        )  # 未知ユーザに対する推薦は諦める。
         ids, scores = self.model.recommend(
             user_idxes, self.feedback_matrix[user_idxes], N=K, filter_already_liked_items=True
         )
 
-        user_id_to_recommend_news_ids_map: dict[int, list[int]] = {
-            self.id_mapper.idx_to_user_id[user_idx]: ids[i] for i, user_idx in enumerate(user_idxes)
+        user_id_to_recommend_news_ids_map: dict[str, list[str]] = {
+            self.id_mapper.idx_to_user_id[user_idx]: [self.id_mapper.idx_to_news_id[news_idx] for news_idx in ids[i]]
+            for i, user_idx in enumerate(user_idxes)
         }
         user_id_to_recommend_scores_map: dict[int, list[float]] = {
             self.id_mapper.idx_to_user_id[user_idx]: scores[i] for i, user_idx in enumerate(user_idxes)
