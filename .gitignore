@@ -11,3 +11,5 @@ wheels/
 
 dataset/*
 !dataset/download_mind.py
+
+.DS_Store

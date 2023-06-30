@@ -1,4 +1,4 @@
-from src.const.path import MIND_SMALL_VAL_DATASET_DIR, MIND_SMALL_TRAIN_DATASET_DIR
+from src.const.path import MIND_SMALL_VAL_DATASET_DIR
 from src.utils.dataset.MINDDataFrame import MINDDataFrame
 
 
@@ -25,7 +25,7 @@ class TestMINDDataFrame:
         assert len(news_df) == 42416
 
     def test_read_behavior_df(self) -> None:
-        small_val_behavior_tsv_path = MIND_SMALL_TRAIN_DATASET_DIR / "behaviors.tsv"
+        small_val_behavior_tsv_path = MIND_SMALL_VAL_DATASET_DIR / "behaviors.tsv"
         behavior_df = MINDDataFrame().read_behavior_df(small_val_behavior_tsv_path)
         assert behavior_df.columns == [
             "impression_id",
