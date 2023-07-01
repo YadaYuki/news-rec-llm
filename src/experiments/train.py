@@ -1,7 +1,7 @@
 from utils.dataset.MINDDataFrame import MINDDataFrame
 from utils.dataset.dataset import create_news_and_user_ids_to_clicked_map
 from const.path import MIND_SMALL_TRAIN_DATASET_DIR, MIND_SMALL_VAL_DATASET_DIR
-from recommendation.ImplicitMFBasedNewsRecommender import ImplicitMFBasedNewsRecommender
+from recommendation.RandomNewsRecommender import RandomNewsRecommender
 from utils.list import uniq
 import numpy as np
 from utils.metrics import metrics
@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     # Train Model
     logging.info("Training Recommender ... ")
-    recommender = ImplicitMFBasedNewsRecommender()
+    recommender = RandomNewsRecommender()
     recommender.fit(train_behavior_df, train_news_df)
 
     # Load Validation Data.
