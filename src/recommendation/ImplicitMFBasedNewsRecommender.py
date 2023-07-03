@@ -2,10 +2,11 @@ from .NewsRecommenderBase import NewsRecommenderBase
 import polars as pl
 import numpy as np
 from implicit.als import AlternatingLeastSquares
-from pydantic import BaseModel
 from typing import Tuple
 import scipy
 from utils.list import uniq
+from utils.logger import logging
+from pydantic import BaseModel
 
 
 class MatrixIDMapper(BaseModel):
@@ -18,7 +19,7 @@ class MatrixIDMapper(BaseModel):
 class ImplicitMFBasedNewsRecommender(NewsRecommenderBase):
     def __init__(self) -> None:
         #  TODO: Hyperparameter Tuning & Device.
-        self.model = AlternatingLeastSquares()
+        self.model = AlternatingLeastSquares(factors=64)
         self.feedback_matrix: scipy.sparse.spmatrix = None
         self.id_mapper: MatrixIDMapper | None = None
 
@@ -40,7 +41,7 @@ class ImplicitMFBasedNewsRecommender(NewsRecommenderBase):
             [self.id_mapper.user_id_to_idx_map[user_id] for user_id in filtered_user_ids]
         )  # 未知ユーザに対する推薦は諦める。
         ids, scores = self.model.recommend(
-            user_idxes, self.feedback_matrix[user_idxes], N=K, filter_already_liked_items=True
+            user_idxes, self.feedback_matrix[user_idxes], N=K, filter_already_liked_items=False
         )
 
         user_id_to_recommend_news_ids_map: dict[str, list[str]] = {
@@ -60,21 +61,26 @@ class ImplicitMFBasedNewsRecommender(NewsRecommenderBase):
         self,
         behavior_df: pl.DataFrame,
     ) -> Tuple[scipy.sparse.spmatrix, MatrixIDMapper]:
-        behavior_df.select(["user_id", "news_id", "clicked"]).groupby(["user_id", "news_id"]).sum()
-        user_ids: list[str] = behavior_df["user_id"].to_list()
-        news_ids: list[str] = behavior_df["news_id"].to_list()
-
-        unique_user_id, unique_news_id = uniq(user_ids), uniq(news_ids)
+        unique_user_id, unique_news_id = uniq(behavior_df["user_id"].to_list()), uniq(behavior_df["news_id"].to_list())
         user_id_to_idx_map: dict[str, int] = {uid: i for i, uid in enumerate(unique_user_id)}
         news_id_to_idx_map: dict[str, int] = {uid: i for i, uid in enumerate(unique_news_id)}
 
-        users = np.array([user_id_to_idx_map[uid] for uid in user_ids])
-        news = np.array([news_id_to_idx_map[nid] for nid in news_ids])
-        clicked = behavior_df["clicked"].to_numpy()
+        clicked_behavior_df = (
+            behavior_df.select(["user_id", "news_id", "clicked"])
+            .groupby(["user_id", "news_id"])
+            .agg(total_click=pl.col("clicked").sum())
+            .filter(pl.col("total_click") > 0)
+        )
+        clicked_users = np.array([user_id_to_idx_map[uid] for uid in clicked_behavior_df["user_id"].to_list()])
+        clicked_news = np.array([news_id_to_idx_map[nid] for nid in clicked_behavior_df["news_id"].to_list()])
+        total_click = clicked_behavior_df["total_click"].to_numpy()
 
         matrix_shape = (len(unique_user_id), len(unique_news_id))
 
-        feedback_matrix = scipy.sparse.csr_matrix((clicked, (users, news)), shape=matrix_shape)
+        feedback_matrix = scipy.sparse.csr_matrix((total_click, (clicked_users, clicked_news)), shape=matrix_shape)
+
+        logging.info(f"matrix_shape:{matrix_shape}")
+        logging.info(f"clicked_behavior_df size:{len(clicked_behavior_df)},clicked_behavior_df:{clicked_behavior_df}")
 
         return feedback_matrix, MatrixIDMapper(
             **{
