@@ -45,7 +45,5 @@ if __name__ == "__main__":
             recommended_top_Kth_items_scores.append(news_and_user_ids_to_clicked_map[(user_id, recommend_news_id)])
         ndcg_at_10_list.append(metrics.nDCG_K(recommended_top_Kth_items_scores, K))
 
-    logging.info(list(recommended_news_ids_map.items())[:100])
-    logging.info(ndcg_at_10_list[:100])
     logging.info(sum(ndcg_at_10_list) / len(ndcg_at_10_list))
     logging.info("Completed")
