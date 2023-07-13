@@ -13,8 +13,11 @@ class ScaledDotProductAttention(nn.Module):
         V -- [batch_size, head_size, seq_len, d_k] | [batch_size, seq_len, d_k]
         """
         seq_len, d_k = Q.size(-2), Q.size(-1)
-
-        attention_mask = mask if mask is not None else torch.zeros(seq_len, seq_len)  # TODO: attention mask
+        attention_mask = (
+            torch.zeros(seq_len, seq_len).masked_fill_(mask, -float("inf"))
+            if mask is not None
+            else torch.zeros(seq_len, seq_len)
+        )
 
         attention_weight = torch.softmax(
             torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(d_k) + attention_mask, dim=-1
