@@ -14,4 +14,6 @@ def test_news_encoder() -> None:
 
     input_tensor = torch.arange(batch_size * seq_len).view(batch_size, seq_len)
 
-    plm_news_encoder(input_tensor)
+    output = plm_news_encoder(input_tensor)
+
+    assert tuple(output.size()) == (batch_size, emb_dim)
