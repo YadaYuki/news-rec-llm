@@ -8,7 +8,7 @@ class PLMBasedNewsEncoder(nn.Module):
     def __init__(
         self,
         pretrained: str = "bert-base-uncased",
-        last_attn_num_heads: int = 12,
+        multihead_attn_num_heads: int = 16,
         additive_attn_hidden_dim: int = 200,
         batch_first: bool = True,
     ):
@@ -18,7 +18,7 @@ class PLMBasedNewsEncoder(nn.Module):
         plm_hidden_size = AutoConfig.from_pretrained(pretrained).hidden_size
 
         self.multihead_attention = nn.MultiheadAttention(
-            embed_dim=plm_hidden_size, num_heads=last_attn_num_heads, batch_first=batch_first
+            embed_dim=plm_hidden_size, num_heads=multihead_attn_num_heads, batch_first=batch_first
         )
         self.additive_attention = AdditiveAttention(plm_hidden_size, additive_attn_hidden_dim)
 
