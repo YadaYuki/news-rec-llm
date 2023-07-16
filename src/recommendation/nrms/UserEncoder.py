@@ -9,12 +9,11 @@ class UserEncoder(nn.Module):
         hidden_size: int,
         multihead_attn_num_heads: int = 16,
         additive_attn_hidden_dim: int = 200,
-        batch_first: bool = True,
     ) -> None:
         super().__init__()
         self.hidden_size = hidden_size
         self.multihead_attention = nn.MultiheadAttention(
-            embed_dim=hidden_size, num_heads=multihead_attn_num_heads, batch_first=batch_first
+            embed_dim=hidden_size, num_heads=multihead_attn_num_heads, batch_first=True
         )
         self.additive_attention = AdditiveAttention(hidden_size, additive_attn_hidden_dim)
 
