@@ -1,5 +1,5 @@
 from src.const.path import MIND_SMALL_VAL_DATASET_DIR
-from src.utils.dataset.MINDDataFrame import MINDDataFrame
+from src.utils.mind.MINDDataFrame import MINDDataFrame
 
 
 class TestMINDDataFrame:
@@ -27,11 +27,5 @@ class TestMINDDataFrame:
     def test_read_behavior_df(self) -> None:
         small_val_behavior_tsv_path = MIND_SMALL_VAL_DATASET_DIR / "behaviors.tsv"
         behavior_df = MINDDataFrame().read_behavior_df(small_val_behavior_tsv_path)
-        assert behavior_df.columns == [
-            "impression_id",
-            "user_id",
-            "news_id",
-            "time",
-            "history",
-            "clicked",
-        ]
+        assert behavior_df.columns == ["impression_id", "user_id", "time", "history", "news_id", "clicked"]
+        assert len(behavior_df) == 73152

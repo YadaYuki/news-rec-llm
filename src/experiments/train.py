@@ -1,5 +1,5 @@
-from utils.dataset.MINDDataFrame import MINDDataFrame
-from utils.dataset.dataset import create_news_and_user_ids_to_clicked_map
+from utils.mind.MINDDataFrame import MINDDataFrame
+from utils.mind.dataset import create_news_and_user_ids_to_clicked_map
 from const.path import MIND_SMALL_TRAIN_DATASET_DIR, MIND_SMALL_VAL_DATASET_DIR
 from recommendation.RandomNewsRecommender import RandomNewsRecommender
 from utils.list import uniq

@@ -2,6 +2,7 @@ import polars as pl
 import pandas as pd
 from pathlib import Path
 from typing import Tuple
+from utils.logger import logging
 
 
 class MINDDataFrame:
@@ -41,23 +42,18 @@ class MINDDataFrame:
         )
         behavior_df = (
             behavior_df.with_columns((pl.col("impressions").str.split(" ")).alias("impression_news_list"))
-            .explode(pl.col("impression_news_list"))
             .with_columns(
                 [
-                    (pl.col("impression_news_list").str.split("-").list.get(0)).alias("news_id"),
-                    (pl.col("impression_news_list").str.split("-").list.get(1).str.parse_int()).alias("clicked"),
+                    (pl.col("impression_news_list").apply(lambda v: [item.split("-")[0] for item in v])).alias(
+                        "news_id"
+                    ),
+                    (pl.col("impression_news_list").apply(lambda v: [int(item.split("-")[1]) for item in v])).alias(
+                        "clicked"
+                    ),
                 ]
             )
-            .select(
-                [
-                    "impression_id",
-                    "user_id",
-                    "news_id",
-                    "time",
-                    "history",
-                    "clicked",
-                ]
-            )
+            .select(["impression_id", "user_id", "time", "history", "news_id", "clicked"])
         )
 
+        logging.info(behavior_df[0])
         return behavior_df
