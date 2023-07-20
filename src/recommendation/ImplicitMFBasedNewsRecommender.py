@@ -90,3 +90,15 @@ class ImplicitMFBasedNewsRecommender(NewsRecommenderBase):
                 "idx_to_news_id": unique_news_id,
             }
         )
+
+    def _explode_behavior_df(self, behavior_df: pl.DataFrame):
+        return (
+            behavior_df.explode(pl.col("impressions"))
+            .with_columns(
+                [
+                    pl.col("impressions").struct.field("news_id").alias("news_id"),
+                    pl.col("impressions").struct.field("clicked").alias("clicked"),
+                ]
+            )
+            .select(["impression_id", "user_id", "time", "history", "news_id", "clicked"])
+        )
