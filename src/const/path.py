@@ -1,11 +1,13 @@
 import pathlib
 
+
 PROJECT_ROOT = (pathlib.Path(__file__) / ".." / ".." / "..").resolve()
 
 DATASET_DIR = PROJECT_ROOT / "dataset"
 
 MIND_DATASET_DIR = DATASET_DIR / "mind"
 
+CACHE_DIR = PROJECT_ROOT / ".cache"
 
 MIND_SMALL_DATASET_DIR = MIND_DATASET_DIR / "small"
 MIND_SMALL_VAL_DATASET_DIR = MIND_SMALL_DATASET_DIR / "val"

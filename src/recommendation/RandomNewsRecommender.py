@@ -11,6 +11,7 @@ class RandomNewsRecommender(NewsRecommenderBase):
         self.unique_news_id: list[str] = []
 
     def fit(self, behavior_df: pl.DataFrame, news_df: pl.DataFrame) -> None:
+        behavior_df = self._explode_behavior_df(behavior_df)
         self.unique_news_id = uniq(behavior_df["news_id"].to_list())
 
     def recommend_top_k_items(
@@ -24,3 +25,15 @@ class RandomNewsRecommender(NewsRecommenderBase):
 
     def predict_score(self, val_behavior_df: pl.DataFrame, val_news_df: pl.DataFrame) -> np.ndarray:
         return np.array([])
+
+    def _explode_behavior_df(self, behavior_df: pl.DataFrame) -> pl.DataFrame:
+        return (
+            behavior_df.explode(pl.col("impressions"))
+            .with_columns(
+                [
+                    pl.col("impressions").struct.field("news_id").alias("news_id"),
+                    pl.col("impressions").struct.field("clicked").alias("clicked"),
+                ]
+            )
+            .select(["impression_id", "user_id", "time", "history", "news_id", "clicked"])
+        )

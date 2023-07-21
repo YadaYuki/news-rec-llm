@@ -4,9 +4,19 @@ from collections import defaultdict
 
 
 def create_news_and_user_ids_to_clicked_map(behavior_df: pl.DataFrame) -> dict[Tuple[str, str], int]:
+    behavior_df = (
+        behavior_df.explode(pl.col("impressions"))
+        .with_columns(
+            [
+                pl.col("impressions").struct.field("news_id").alias("news_id"),
+                pl.col("impressions").struct.field("clicked").alias("clicked"),
+            ]
+        )
+        .select(["user_id", "news_id", "clicked"])
+    )
+
     total_click_df = (
-        behavior_df.select(["user_id", "news_id", "clicked"])
-        .groupby(["user_id", "news_id"])
+        behavior_df.groupby(["user_id", "news_id"])
         .agg(total_click=pl.col("clicked").sum())
         .filter(pl.col("total_click") > 0)
     )
