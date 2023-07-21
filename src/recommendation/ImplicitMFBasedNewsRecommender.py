@@ -61,6 +61,8 @@ class ImplicitMFBasedNewsRecommender(NewsRecommenderBase):
         self,
         behavior_df: pl.DataFrame,
     ) -> Tuple[scipy.sparse.spmatrix, MatrixIDMapper]:
+        behavior_df = self._explode_behavior_df(behavior_df)
+
         unique_user_id, unique_news_id = uniq(behavior_df["user_id"].to_list()), uniq(behavior_df["news_id"].to_list())
         user_id_to_idx_map: dict[str, int] = {uid: i for i, uid in enumerate(unique_user_id)}
         news_id_to_idx_map: dict[str, int] = {uid: i for i, uid in enumerate(unique_news_id)}
@@ -91,7 +93,7 @@ class ImplicitMFBasedNewsRecommender(NewsRecommenderBase):
             }
         )
 
-    def _explode_behavior_df(self, behavior_df: pl.DataFrame):
+    def _explode_behavior_df(self, behavior_df: pl.DataFrame) -> pl.DataFrame:
         return (
             behavior_df.explode(pl.col("impressions"))
             .with_columns(
