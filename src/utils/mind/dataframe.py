@@ -7,6 +7,7 @@ import json
 import hashlib
 from const.path import CACHE_DIR
 import pickle
+from utils.logger import logging
 
 
 def _cache_dataframe(fn: Callable) -> Callable:
@@ -68,12 +69,12 @@ def read_behavior_df(path_to_tsv: Path, clear_cache: bool = False) -> pl.DataFra
             "column_1": "impression_id",
             "column_2": "user_id",
             "column_3": "time",
-            "column_4": "history",
-            "column_5": "impressions",
+            "column_4": "history_str",
+            "column_5": "impressions_str",
         }
     )
     behavior_df = (
-        behavior_df.with_columns((pl.col("impressions").str.split(" ")).alias("impression_news_list"))
+        behavior_df.with_columns((pl.col("impressions_str").str.split(" ")).alias("impression_news_list"))
         .with_columns(
             [
                 pl.col("impression_news_list")
@@ -81,6 +82,8 @@ def read_behavior_df(path_to_tsv: Path, clear_cache: bool = False) -> pl.DataFra
                 .alias("impressions")
             ]
         )
+        .with_columns([pl.col("history_str").str.split(" ").alias("history")])
         .select(["impression_id", "user_id", "time", "history", "impressions"])
     )
+    logging.info(behavior_df[0])
     return behavior_df
