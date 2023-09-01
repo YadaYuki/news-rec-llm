@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-09-01T06:20:45.222Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="v4e3gYdkLe07vH05MWLs" version="21.7.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-09-01T06:23:35.720Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="9pfGQryPjkX_U8q7OEqv" version="21.7.1" type="github">
   <diagram name="ページ1" id="v9oQl_vbz053JDKhnATE">
     <mxGraphModel dx="954" dy="610" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -23,7 +23,34 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="AxmUaDvD2_jE19oLRADg-10" value="&lt;font color=&quot;#000000&quot;&gt;ChatGPT API ( Open AI )&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="510" y="180" width="147" height="59" as="geometry" />
+          <mxGeometry x="530" y="150" width="147" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-11" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="430" y="290" as="sourcePoint" />
+            <mxPoint x="500" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-12" value="&lt;font color=&quot;#000000&quot;&gt;CodeExecutorAPI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="700" y="331" width="147" height="59" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-13" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="540" y="230" as="sourcePoint" />
+            <mxPoint x="470" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-14" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="510" y="350" as="sourcePoint" />
+            <mxPoint x="680" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-15" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="677" y="380" as="sourcePoint" />
+            <mxPoint x="507" y="380" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
