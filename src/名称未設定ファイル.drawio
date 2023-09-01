@@ -1,56 +1,98 @@
-<mxfile host="app.diagrams.net" modified="2023-09-01T06:23:35.720Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="9pfGQryPjkX_U8q7OEqv" version="21.7.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-09-01T06:49:41.642Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="BKiALoGcd_7sn5quflAZ" version="21.7.1" type="github">
   <diagram name="ページ1" id="v9oQl_vbz053JDKhnATE">
     <mxGraphModel dx="954" dy="610" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="AxmUaDvD2_jE19oLRADg-2" value="&lt;font color=&quot;#000000&quot;&gt;Code Interpreter API&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-2" value="&lt;font color=&quot;#000000&quot;&gt;Code Interpreter API&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;labelBackgroundColor=none;" vertex="1" parent="1">
           <mxGeometry x="333" y="331" width="147" height="59" as="geometry" />
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-3" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#000000;" vertex="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-3" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;labelBackgroundColor=none;" vertex="1" parent="1">
           <mxGeometry x="136" y="326" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-4" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-4" value="" style="endArrow=classic;html=1;fontColor=default;labelBackgroundColor=none;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="192" y="350" as="sourcePoint" />
             <mxPoint x="308" y="350" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-7" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-7" value="" style="endArrow=classic;html=1;fontColor=default;labelBackgroundColor=none;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="310" y="370" as="sourcePoint" />
             <mxPoint x="190" y="370" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-10" value="&lt;font color=&quot;#000000&quot;&gt;ChatGPT API ( Open AI )&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-10" value="&lt;font color=&quot;#000000&quot;&gt;ChatGPT API ( Open AI )&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;labelBackgroundColor=none;" vertex="1" parent="1">
           <mxGeometry x="530" y="150" width="147" height="59" as="geometry" />
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-11" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-11" value="" style="endArrow=classic;html=1;fontColor=default;labelBackgroundColor=none;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="430" y="290" as="sourcePoint" />
             <mxPoint x="500" y="210" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-12" value="&lt;font color=&quot;#000000&quot;&gt;CodeExecutorAPI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;" vertex="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-12" value="&lt;font color=&quot;#000000&quot;&gt;CodeExecutorAPI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;labelBackgroundColor=none;" vertex="1" parent="1">
           <mxGeometry x="700" y="331" width="147" height="59" as="geometry" />
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-13" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-13" value="" style="endArrow=classic;html=1;fontColor=default;labelBackgroundColor=none;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="540" y="230" as="sourcePoint" />
             <mxPoint x="470" y="310" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-14" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-14" value="" style="endArrow=classic;html=1;fontColor=default;labelBackgroundColor=none;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="510" y="350" as="sourcePoint" />
             <mxPoint x="680" y="350" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AxmUaDvD2_jE19oLRADg-15" value="" style="endArrow=classic;html=1;fontColor=#000000;strokeColor=#000;" edge="1" parent="1">
+        <mxCell id="AxmUaDvD2_jE19oLRADg-15" value="" style="endArrow=classic;html=1;fontColor=default;labelBackgroundColor=none;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="677" y="380" as="sourcePoint" />
             <mxPoint x="507" y="380" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-16" value="1. Request: text &amp;amp; files" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="190" y="310" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-17" value="&amp;nbsp;2.&amp;nbsp; Create prompt&amp;nbsp;&lt;br&gt;&amp;nbsp;6.&amp;nbsp; Extract python code&lt;br&gt;10. Create prompt&lt;br&gt;&lt;br&gt;if is_error = True:&lt;br&gt;&amp;nbsp; &amp;nbsp;14. create prompt&amp;nbsp;from&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;error message.&lt;br&gt;&amp;nbsp; &amp;nbsp; 15. Retry 3 ~ 13&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="338" y="430" width="151.5" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="AxmUaDvD2_jE19oLRADg-2" target="AxmUaDvD2_jE19oLRADg-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="370" y="420" />
+              <mxPoint x="443" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-25" value="&amp;nbsp;3. Request: text&lt;br&gt;11.Request: text" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="370" y="209" width="110" height="41" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-26" value="&amp;nbsp; 4. Respond: python code &amp;amp; message&lt;br&gt;12. Respond: message" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="510" y="260" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-29" value="&amp;nbsp; 5. Respond: python, msg&lt;br&gt;13. Respond: &lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;exec_result, msg" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="180" y="386" width="170" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-31" value="7. Request:&amp;nbsp;&lt;br&gt;python code &amp;amp; files" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="510" y="315" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-32" value="9. Respond:&amp;nbsp;&lt;br&gt;exec_result &amp;amp; output files &amp;amp; is_error" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="510" y="398" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="737" y="390" as="sourcePoint" />
+            <mxPoint x="810" y="390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="737" y="420" />
+              <mxPoint x="810" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AxmUaDvD2_jE19oLRADg-34" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&amp;nbsp;8. Execute python code&lt;/span&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="693.5" y="430" width="160" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
